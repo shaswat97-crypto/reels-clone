@@ -36,3 +36,62 @@
     transform: rotate(360deg);
   }
 }
+img{
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 10;
+}
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.signupwrapper{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.signupcard{
+  width: 22rem;
+  margin-top: 10vw;
+}
+.logo{
+  padding: 2rem 3rem 1rem 3rem;
+}
+.tnc{
+  text-align: center;
+  font-size: 1px;
+  color: gray;
+}
+.phone{
+  background-image: url('./images/phone.PNG');
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 40rem;
+  width: 25rem;
+  min-width: 25rem;
+  margin-right: 1rem;
+  position: relative;
+  z-index: -10;
+}
+.phoneimage{
+  position: absolute;
+  width: 15.7rem;
+  min-width: 15.7rem;
+  height: 36rem;
+  right:27px;
+  top:38px;
+  z-index: -10;
+}
+.carousel{
+  height: 100%;
+  width: 100%;
+}
+
+@media screen and (max-width:800px){
+  .signupwrapper{
+    flex-direction: column-reverse;
+  }
+}
+
