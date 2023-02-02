@@ -20,6 +20,8 @@ import { Carousel } from 'react-responsive-carousel';
 import { useState } from 'react';
 import { AuthContext } from '../Context/AuthContext';
 import { auth } from '../firebase';
+import { database } from '../firebase';
+
 
 
 export default function Signup() {
@@ -30,7 +32,7 @@ export default function Signup() {
   const [loading, setLoading] = useState(false);
   const [userName, setUserName] = useState('');
   const history = useNavigate();
-  const {signup} = React.useContext(AuthContext);
+  const { signup } = React.useContext(AuthContext);
 
   let handleClick = async () => {
     try {
@@ -38,7 +40,45 @@ export default function Signup() {
       setError('');
       let userObj = await signup(email, password);
       let uid = userObj.user.uid;
-      console.log(uid)
+      console.log(uid);
+
+      database.users.doc(uid).set({
+        email: email,
+        userId: uid,
+        fullName: name,
+        profileUrl: null,
+        timestamp: database.getTimeStamp()
+      })
+
+      // database.users.doc(uid).update({
+      //   timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      // });
+
+      // let uploadTask = storage.ref(`user/${uid}/name`).put(name);
+      // uploadTask.on('state_changed', fn1, fn2, fn3);
+      // function fn1(snapshot) {
+      //   let progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      //   console.log(`upload ${progress} done`);
+      // }
+      // function fn2(err) {
+      //   console.log(err);
+      //   setError(err.code);
+      //   setTimeout(() => setError(''), 2000);
+      //   setLoading(false);
+      //   return;
+      // }
+      // async function fn3() {
+      //   let url = await uploadTask.ref.getDownloadURL();
+      //   console.log(url);
+      //   database.users.doc(uid).set({
+      //     email: email,
+      //     userId: uid,
+      //     fullName: name,
+      //     profileUrl: url,
+      //     createdAt: database.getTimeStamp()
+      //   })
+      //   setLoading(false);
+      // }
       setLoading(false);
       history('/');
       // console.log('created obj')

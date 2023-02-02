@@ -89,6 +89,11 @@ img{
   width: 100%;
 }
 
+.uploadButton{
+  display: flex;
+  align-items: center;
+}
+
 @media screen and (max-width:800px){
   .signupwrapper{
     flex-direction: column-reverse;

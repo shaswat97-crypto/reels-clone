@@ -29,6 +29,8 @@ export function AuthProvider({children}) {
     //adding event listener whenever there is change in auth state
     useEffect(() => {
         const unsub = auth.onAuthStateChanged((user) => {
+            //state changed matlab naya userid ya password aaya to ab latest user nuje mil jaega, ab me us user ko set kar sakta hu
+            //user kya hai, auth vaala user object hai
             setUser(user);
             setLoading(false);
         })
