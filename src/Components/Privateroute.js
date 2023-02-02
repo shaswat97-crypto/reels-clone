@@ -1,13 +1,16 @@
 import React, { useContext } from 'react'
 import { Navigate, Route } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthContext'
+import Feed from './Feed';
 
-function Privateroute({component:Component}, ...rest) {
-    const {user} = useContext(AuthContext);
+function Privateroute() {
+  // console.log(Component, rest);
+  const { user } = useContext(AuthContext);
   return (
-    <Route {...rest} render={props=>{
-        return user?<Component{...props}></Component>:<Navigate to='login'></Navigate>
-    }}></Route>
+    <Route render={(props) => {
+      return user ? <Feed {...props}></Feed> : <Navigate to='/login'></Navigate>
+    }}>
+    </Route>
   )
 }
 

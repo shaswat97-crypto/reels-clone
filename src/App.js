@@ -8,16 +8,14 @@ import React, { useState, useEffect } from "react";
 import { auth } from "./firebase";
 import Feed from './Components/Feed';
 import Privateroute from './Components/Privateroute';
+import AllRoutes from './AllRoutes';
 function App() {
   return (
     <>
       <Router>
         <AuthProvider>
-          <Routes>
-            <Route path='/signup' element={<Signup />}></Route>
-            <Route path='/login' element={<Login />}></Route>
-            <Privateroute path='/' element={<Feed />}></Privateroute>
-          </Routes>
+          <AllRoutes>
+          </AllRoutes>
         </AuthProvider>
       </Router>
     </>

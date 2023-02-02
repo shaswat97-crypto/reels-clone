@@ -32,6 +32,7 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const {login} = useContext(AuthContext);
   const history = useNavigate();
+  // console.log(data);
 
   // console.log('render');
 
@@ -40,11 +41,12 @@ export default function Login() {
       setLoading(true);
       let userObj = await login(email, password);
       let uid = userObj.user.uid;
-      history.push('./');
+      setLoading(false);
+      history('/');
     }
     catch(err){
       console.log(err);
-      setError(err);
+      setError(err.code);
       setTimeout(()=>{setError('')}, 2000);
       setLoading(false);
     }
@@ -77,12 +79,12 @@ export default function Login() {
           <CardContent>
 
             {
-              error && <Alert sx={{fontSize:13}} severity="error">This is an error alert — check it out!</Alert>
+              error && <Alert sx={{fontSize:13}} severity="error">{error}</Alert>
             }
             <TextField fullWidth label="Phone number, username or email" id="fullWidth" margin='dense' size='small' value={email} onChange={(e) => { setEmail(e.target.value) }} />
             <TextField fullWidth label="Password" id="fullWidth" margin='dense' size='small' value={password} onChange={(e) => { setPassword(e.target.value) }} />
             <Button sx={{ mt: 2, mb:2 }} disabled={loading} variant="contained" size='small' fullWidth={true} margin='dense' onClick={handleClick} >Log in</Button>
-            <Box sx={{display:'flex', justifyContent:'center', alignItems:'center'}}><Link style={{textDecoration:'none', fontSize:'12px'}} to={'/login'} >Forgot password ?</Link></Box>
+            <Box sx={{display:'flex', justifyContent:'center', alignItems:'center'}}><Link style={{textDecoration:'none', fontSize:'12px'}} to={'/forgotPassword'} >Forgot password ?</Link></Box>
           </CardContent>
         </Card>
         <Card variant='outlined' sx={{ mt: 2 }}>

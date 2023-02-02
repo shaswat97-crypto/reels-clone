@@ -39,12 +39,14 @@ export default function Signup() {
       let userObj = await signup(email, password);
       let uid = userObj.user.uid;
       console.log(uid)
+      setLoading(false);
+      history('/');
       // console.log('created obj')
       // console.log(userObj);
     }
     catch (err) {
       console.log(err)
-      setError(err);
+      setError(err.code);
       setTimeout(() => { setError('') }, 2000);
       setLoading(false);
     }
@@ -77,7 +79,7 @@ export default function Signup() {
             <Typography align='center' sx={{ mb: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', texAlign: 'center', color: 'gray', fontSize: 17 }}>
               Sign up to see photos and videos from your friends.
             </Typography>
-            {error && <Alert severity="error">error</Alert>}
+            {error && <Alert severity="error">{error}</Alert>}
             <TextField fullWidth label="Mobile Number or Email" id="fullWidth" margin='dense' size='small' value={email} onChange={(e) => { setEmail(e.target.value) }} />
             <TextField fullWidth label="Full Name" id="fullWidth" margin='dense' size='small' value={name} onChange={(e) => { setName(e.target.value) }} />
             <TextField fullWidth label="Username" id="fullWidth" margin='dense' size='small' value={userName} onChange={(e) => { setUserName(e.target.value) }} />
