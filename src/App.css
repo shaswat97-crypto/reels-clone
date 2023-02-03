@@ -94,6 +94,75 @@ img{
   align-items: center;
 }
 
+header{
+  border: 1px solid black;
+  margin: 1rem;
+  padding: 1rem;
+}
+
+.postHolder{
+  display: flex;
+  justify-content: center;
+  overflow: scroll;
+  scroll-snap-type: y mandatory;
+  scrollbar-width: none;
+}
+.postHolder::-webkit-scrollbar{
+  display: none;
+}
+.post{
+  width: 40rem;
+  height: 77vh;
+  
+}
+
+
+video{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  
+}
+.videocont{
+  width: 100%;
+  height: 100%;
+  scroll-snap-align: start;
+}
+.frag{
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.avatar{
+  position: absolute;
+  /* background-color: white; */
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  bottom: 6%;
+  left: 2%;
+}
+.name{
+  /* color: wheat; */
+  font-weight: bold;
+}
+.likecont{
+  position: absolute;
+  /* background-color: black; */
+  bottom: 1px;
+  left: 3%;
+}
+.like{
+  color: red;
+  /* border: solid 1px ; */
+  cursor: pointer;
+}
+.unlike{
+  color: gray;
+  cursor: pointer;
+
+}
+
 @media screen and (max-width:800px){
   .signupwrapper{
     flex-direction: column-reverse;
