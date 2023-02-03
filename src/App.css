@@ -139,28 +139,57 @@ video{
   z-index: 10;
   display: flex;
   align-items: center;
-  bottom: 6%;
+  bottom: 8%;
   left: 2%;
 }
 .name{
-  /* color: wheat; */
+  color: wheat;
   font-weight: bold;
+  text-shadow: 0 0 10px #000000
 }
 .likecont{
   position: absolute;
   /* background-color: black; */
-  bottom: 1px;
+  bottom: 6px;
   left: 3%;
 }
 .like{
   color: red;
   /* border: solid 1px ; */
   cursor: pointer;
+  /* font-size: 4rem; */
 }
 .unlike{
-  color: gray;
+  color: white;
   cursor: pointer;
 
+}
+.commentcont{
+  position: absolute;
+  bottom: 6px;
+  left: 9%;
+  color: white;
+  cursor: pointer;
+}
+.likecomment{
+  display: flex;
+  height: 30px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2px;
+}
+.apicomments{
+  height: 65vh;
+}
+
+
+.text{
+  color: rgb(80, 79, 79);
+  margin: 10px 0;
+}
+.unlike2{
+  color: rgb(80, 79, 79);
+  cursor: pointer;
 }
 
 @media screen and (max-width:800px){

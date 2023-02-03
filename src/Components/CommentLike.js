@@ -11,7 +11,6 @@ function Like({ user, post }) {
         check = post.likes.includes(user.userId) ? true : false
         setLike(check);
     }, [])
-
     let handleClick = async (e) => {
         if (like) {
             let narr = post.likes.filter((id)=>{return id!=user.userId})
@@ -27,12 +26,11 @@ function Like({ user, post }) {
         }
         setLike(!like);
     }
-
     return (
         <React.Fragment>
             {
                 like != null && post && user &&
-                    like ? <FavoriteIcon className='like' onClick={(e) => handleClick(e)}></FavoriteIcon> : <FavoriteIcon className='unlike' onClick={(e) => handleClick(e)}></FavoriteIcon>
+                    like ? <FavoriteIcon className='like' onClick={(e) => handleClick(e)}></FavoriteIcon> : <FavoriteIcon className='unlike2' onClick={(e) => handleClick(e)}></FavoriteIcon>
             }
         </React.Fragment>
     )

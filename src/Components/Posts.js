@@ -5,7 +5,8 @@ import Video from './Video';
 import CircularProgress from '@mui/material/CircularProgress';
 import Avatar from '@mui/material/Avatar';
 import Like from './Like';
-
+import CommentIcon from '@mui/icons-material/Comment';
+import CommentModal from './CommentModal';
 
 function Posts(props) {
   // console.log(props)
@@ -46,6 +47,7 @@ function Posts(props) {
                     <p className='name'>{props.user.fullName}</p>
                   </div>
                   <div className="likecont"><Like user={props.user} post={post}></Like></div>
+                  <CommentModal post={post} user={props.user}></CommentModal>
                 </div>
               ))
             }
