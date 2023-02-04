@@ -10,7 +10,7 @@ function Like({ user, post }) {
         let check = false;
         check = post.likes.includes(user.userId) ? true : false
         setLike(check);
-    }, [])
+    }, [post.likes])
     let handleClick = async (e) => {
         if (like) {
             let narr = post.likes.filter((id)=>{return id!=user.userId})
@@ -24,7 +24,7 @@ function Like({ user, post }) {
                 likes: [...narr]
             })
         }
-        setLike(!like);
+        // setLike(!like);
     }
     return (
         <React.Fragment>

@@ -99,7 +99,10 @@ header{
   margin: 1rem;
   padding: 1rem;
 }
-
+.upload{
+  display: flex;
+  justify-content: center;
+}
 .postHolder{
   display: flex;
   justify-content: center;
@@ -179,13 +182,19 @@ video{
   gap: 2px;
 }
 .apicomments{
-  height: 65vh;
+  /* height: 63vh; */
+  min-height: 10px;
 }
 
-
+.comeentRight{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
 .text{
   color: rgb(80, 79, 79);
-  margin: 10px 0;
+  margin-top: 10px;
 }
 .unlike2{
   color: rgb(80, 79, 79);

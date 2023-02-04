@@ -6,6 +6,7 @@ import Login from './Components/Login';
 import Signup from './Components/Signup';
 import Feed from './Components/Feed';
 import ResetPassword from './Components/ResetPassword';
+import Profile from './Components/Profile';
 
 
 
@@ -16,8 +17,9 @@ function AllRoutes() {
         <Routes>
             <Route path='/signup' element={<Signup />}></Route>
             <Route path='/login' element={<Login />}></Route>
-            <Route path='/' element={user?<Feed />:<Navigate to='/login'></Navigate>}></Route>
             <Route path='/forgotPassword' element={<ResetPassword />}></Route>
+            <Route path='/profile/:id' element={<Profile></Profile>}></Route>
+            <Route path='/' element={user?<Feed />:<Navigate to='/login'></Navigate>}></Route>
         </Routes>
     )
 }

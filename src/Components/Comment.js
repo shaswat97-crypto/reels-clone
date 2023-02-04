@@ -23,7 +23,7 @@ function Comment({ post }) {
           <>
             {
               commentArr.map((comment) => (
-                <div style={{ display: 'flex' }}>
+                <div style={{ display: 'flex', alignItems:'center', marginBottom:'6px' }}>
                   <Avatar src={'sd'} />
                   <p>&nbsp;&nbsp;<span style={{ fontWeight: 'bold' }}>{comment.userName}</span>&nbsp;&nbsp; {comment.comment}</p>
                 </div>

@@ -58,8 +58,9 @@ function UploadFile(props) {
           }
           database.posts.add(obj)
             .then(async (ref) => {
+              // console.log(props.user);
               await database.users.doc(props.user.userId).update({
-                postIdDatabase: props.user.postIds ? [props.user.postIds, ref.id] : [ref.id]
+                postIdDatabase: props.user.postIdDatabase ? [...props.user.postIdDatabase, ref.id] : [ref.id]
               })
             })
             .catch((err) => {
@@ -74,7 +75,7 @@ function UploadFile(props) {
   }
 
   return (
-    <div style={{ marginTop: '2rem' }}>
+    <div style={{ margin: '2px' }}>
       <input type="file" accept='video/*' style={{ display: 'none' }} id='upload' onChange={(e) => { handleChange(e.target.files[0]) }} />
       <label htmlFor="upload">
         {

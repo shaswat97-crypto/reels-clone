@@ -4,6 +4,7 @@ import { AuthContext } from '../Context/AuthContext'
 import UploadFile from './UploadFile';
 import { database } from '../firebase'
 import Posts from './Posts';
+import Header from './Header';
 
 function Feed() {
   const { user, logout } = useContext(AuthContext);
@@ -19,16 +20,13 @@ function Feed() {
   }, [user])
 
   let videoSrc = '';
-  database.posts.get('pUrl').then(url=>{videoSrc=url});
+  database.posts.get('pUrl').then(url => { videoSrc = url });
 
   return (
     <>
-      <header>
-        <div>Feed
-          <button onClick={logout}>logout</button>
-        </div>
-        <UploadFile user={databaseUser}></UploadFile>
-      </header>
+      <Header authUser={databaseUser}></Header>
+      <div className='upload'><UploadFile user={databaseUser}></UploadFile></div>
+
       <main>
         <Posts user={databaseUser}></Posts>
       </main>

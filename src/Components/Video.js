@@ -20,7 +20,7 @@ function Video(props) {
     }
     return (
         <div className='videocont' >
-            <video id={props.source.id} src={props.source.pUrl} muted='muted' onClick={(e)=>{handleClick(e)}} onEnded={(e)=>{handleScroll(e)}} autoPlay></video>
+            <video id={props.source.id} src={props.source.pUrl} muted='muted' onClick={(e)=>{handleClick(e)}} onEnded={(e)=>{handleScroll(e)}}></video>
             
         </div>
     )

@@ -59,17 +59,19 @@ function CommentModal({ post, user }) {
       >
         <Box sx={style}>
           <Box sx={hWidth}><video src={post.pUrl}></video></Box>
-          <Box sx={{ width: '50%', p: 4, pr:1, pl:1 }}>
+          <Box sx={{ width: '60%', pt: 4, pr:1, pl:1, pb:1 }}>
+            <div className="comeentRight">
             <div className="apicomments">
               <Comment post={post}></Comment>
             </div>
             <div className="likecommentcont">
-              <div className="text">Liked by {post.likes.length} poeple</div>
               <div className="likecomment">
                 <CommentLike user={user} post={post}></CommentLike>
-                <TextField onChange={(e)=>setComment(e.target.value)} value={comment} id="outlined-basic" label="Type comment here..." size='small' variant="outlined" />
+                <TextField sx={{width:'100%', pl:1, pr:1}} onChange={(e)=>setComment(e.target.value)} value={comment} id="outlined-basic" label="Type comment here..." size='small' variant="outlined" />
                 <Button variant="outlined" onClick={handleClick}>POST</Button>
               </div>
+              <div className="text">{post.likes.length} likes</div>
+            </div>
             </div>
           </Box>
         </Box>
