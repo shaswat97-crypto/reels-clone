@@ -33,3 +33,19 @@ img{
 .top .right{
     align-items: flex-start;
 }
+.bottom{
+    margin-top: 2rem;
+    width: 100%;
+    display: flex;
+}
+.post{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: flex-start;
+}
+.frag{
+    width: 20vw;
+    height: 63vh;
+}
