@@ -7,7 +7,7 @@ function Video(props) {
     // console.log(props)
     let handleClick = (e)=>{
         e.preventDefault();
-        e.target.muted = !e.target.muted
+        e.target.muted = !e.target.muted;
     }
     let handleScroll = (e) => {
         // console.log(e.target, ReactDOM.findDOMNode(e.target).parentNode.nextSibling);
@@ -20,7 +20,7 @@ function Video(props) {
     }
     return (
         <div className='videocont' >
-            <video id={props.source.id} src={props.source.pUrl} muted='muted' onClick={(e)=>{handleClick(e)}} onEnded={(e)=>{handleScroll(e)}}></video>
+            <video id={props.source.id} src={props.source.pUrl} muted autoPlay onClick={(e)=>{handleClick(e)}} onEnded={(e)=>{handleScroll(e)}}></video>
         </div>
     )
 }

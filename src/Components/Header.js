@@ -24,14 +24,14 @@ const style = {
   color: 'black',
   fontSize: '2.5rem',
   padding: '4px',
-  cursor:'pointer'
+  cursor: 'pointer'
 }
 const hStyle = {
-  border:'none',
-  backgroundColor:'white',
-  margin:'0',
-  alignItems:'center',
-  minHeight:'10px'
+  border: 'none',
+  backgroundColor: 'white',
+  margin: '0',
+  alignItems: 'center',
+  minHeight: '10px'
 }
 const settings = ['Profile', 'Logout'];
 
@@ -46,9 +46,20 @@ function Header(props) {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleProfile = () =>{
+  // const handleExplore = ()=>{
+  //   window.open('https://github.com/shaswat97-crypto', '_blank')
+  //   // win.focus();
+  // }
+
+  const handleProfile = () => {
     // console.log(user);
     navigate(`/profile/${user.uid}`)
+  }
+
+  const handleLogout = async () => {
+    // console.log(user);
+    await logout();
+    navigate('/');
   }
 
   const handleCloseUserMenu = () => {
@@ -60,14 +71,14 @@ function Header(props) {
     <AppBar sx={hStyle} position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <div><img onClick={()=>{databaseUser?navigate('/'):navigate('/login')}} src={logo} className='logoHeader' alt="" /></div>
+          <div><img onClick={() => { databaseUser ? navigate('/') : navigate('/login') }} src={logo} className='logoHeader' alt="" /></div>
           <Box sx={{ width: '90%' }}></Box>
           <Box sx={{ display: 'flex' }}>
-            <HomeIcon onClick={()=>{databaseUser?navigate('/'):navigate('/login')}} sx={style}></HomeIcon>
-            <Link to={'https://github.com/shaswat97-crypto'}><ExploreIcon sx={style}></ExploreIcon></Link> 
+            <HomeIcon onClick={() => { databaseUser ? navigate('/') : navigate('/login') }} sx={style}></HomeIcon>
+            <a href={'https://github.com/shaswat97-crypto'} target={'_blank'}><ExploreIcon sx={style}></ExploreIcon></a>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar sx={{marginLeft:1, height:'28px', width:'28px'}} alt={user.email} src={databaseUser&&databaseUser.profileUrl} />
+                <Avatar sx={{ marginLeft: 1, height: '28px', width: '28px' }} alt={user.email} src={databaseUser && databaseUser.profileUrl} />
               </IconButton>
             </Tooltip>
             <Menu
@@ -86,11 +97,12 @@ function Header(props) {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting}>
-                  <Typography onClick={handleProfile} textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
+              <MenuItem>
+                <Typography onClick={handleProfile} textAlign="center">Profile</Typography>
+              </MenuItem>
+              <MenuItem>
+                <Typography onClick={handleLogout} textAlign="center">Logout</Typography>
+              </MenuItem>
             </Menu>
           </Box>
         </Toolbar>

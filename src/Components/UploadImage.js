@@ -8,6 +8,9 @@ import LinearProgress from '@mui/material/LinearProgress';
 import { Box } from '@mui/system';
 import UploadIcon from '@mui/icons-material/Upload';
 
+const button={
+  fontSize:'12px'
+}
 
 function UploadImage({user}) {
   const [error, setError] = useState('');
@@ -76,8 +79,10 @@ function UploadImage({user}) {
               color="primary"
               component="span"
               disabled={loading}
+              size='small'
+              sx={button}
             >
-               <UploadIcon></UploadIcon> Upload Image
+               <UploadIcon></UploadIcon>&nbsp;Upload Image
             </Button>
         }
       </label>

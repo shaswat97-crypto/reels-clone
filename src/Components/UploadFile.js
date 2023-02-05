@@ -88,7 +88,7 @@ function UploadFile(props) {
               component="span"
               disabled={loading}
             >
-              <MovieCreationIcon></MovieCreationIcon> Upload
+              <MovieCreationIcon></MovieCreationIcon>&nbsp;Upload
             </Button>
         }
       </label>

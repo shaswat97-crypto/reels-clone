@@ -1,16 +1,37 @@
 import React, { useState, useEffect } from "react";
-
-
-import Login from '../Components/Login';
-import Signup from '../Components/Signup';
 import { BrowserRouter as Router, Routes, Route, } from "react-router-dom";
 
-import { auth } from "../firebase";
+import { auth, database } from "../firebase";
 //context api ka store bana liye aur export kiye
 export const AuthContext = React.createContext();
 
 export function AuthProvider({children}) {
-    // console.log(props, props.children.props.children);
+    const [userData, setUserData] = useState([]);
+    const [userPosts, setUserPosts] = useState([]);
+
+    useEffect(()=>{
+        let arr=[];
+        let unsub = database.posts.onSnapshot((snap)=>{
+            snap.forEach(doc=>{
+                arr.push(doc.data())
+            })
+        })
+        setUserPosts(arr);
+
+        return unsub;
+    },[])
+
+    useEffect(()=>{
+        let arr=[];
+        let unsub = database.users.onSnapshot((snap)=>{
+            snap.forEach(doc=>{
+                arr.push(doc.data())
+            })
+        })
+        setUserData(arr);
+
+        return unsub;
+    },[])
     const [user, setUser] = useState();
     const [loading, setLoading] = useState(true);
 
@@ -45,7 +66,9 @@ export function AuthProvider({children}) {
         user,
         signup,
         login,
-        logout
+        logout,
+        userData,
+        userPosts
     }
     return (
         <AuthContext.Provider value={store}>

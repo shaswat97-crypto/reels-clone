@@ -46,6 +46,48 @@ img{
     justify-content: flex-start;
 }
 .profileFrag{
-    width: 20vw;
-    height: 63vh;
+    width: 12rem;
+    height: 22rem;
+    position: relative;
+}
+.commentMod{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+.commentMod>div{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+.commentMod>div>svg{
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+@media screen and (max-width:860px){
+    .profilePost{
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width:500px){
+    .profilePost{
+        justify-content: center;
+    }
+    .profileFrag{
+        width: 5rem;
+        height: 10rem;
+        position: relative;
+    }
+    .container{
+        width: 100vw;
+    }
+    .contcont{
+        padding: 0 1rem;
+    }
 }

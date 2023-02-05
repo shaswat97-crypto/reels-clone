@@ -9,6 +9,7 @@ import Button from '@mui/material/Button';
 import CommentLike from './CommentLike'
 import { database } from '../firebase';
 import Comment from './Comment';
+import { display, height } from '@mui/system';
 
 
 const style = {
@@ -23,10 +24,29 @@ const style = {
   // border: '2px solid #000',
   boxShadow: 24,
   // p: 4,
-  outline: '0'
+  outline: '0',
+  '@media(max-width: 800px)': {
+    width: '80vw'
+  },
+  '@media(max-width: 500px)': {
+    width: '90vw',
+    display: 'flex',
+    flexDirection:'column'
+  }
 };
 const hWidth = {
-  width: '50%'
+  width: '50%',
+  '@media(max-width: 500px)': {
+    width: '100%',
+    height: '50%'
+  }
+}
+const Wwidth = {
+  width: '60%', pt: 4, pr: 1, pl: 1, pb: 1,
+  '@media(max-width: 500px)' : {
+    width: '100%',
+    height:'50%'
+  }
 }
 function CommentModal({ post, user }) {
   // console.log(user.userId)
@@ -34,7 +54,7 @@ function CommentModal({ post, user }) {
   const [comment, setComment] = React.useState('');
   const handleOpen = () => { setOpen(user.userId); }
   const handleClose = () => setOpen(null);
-  const handleClick = async() =>{
+  const handleClick = async () => {
     console.log(comment);
     let commentid = await database.comments.add({
       comment: comment,
@@ -49,6 +69,7 @@ function CommentModal({ post, user }) {
     })
     setComment('');
   }
+
   return (
     <div className="commentcont" >
       <CommentIcon onClick={handleOpen}></CommentIcon>
@@ -58,20 +79,20 @@ function CommentModal({ post, user }) {
         onBackdropClick={handleClose}
       >
         <Box sx={style}>
-          <Box sx={hWidth}><video src={post.pUrl}></video></Box>
-          <Box sx={{ width: '60%', pt: 4, pr:1, pl:1, pb:1 }}>
+          <Box sx={hWidth}><video src={post.pUrl} autoPlay loop></video></Box>
+          <Box sx={Wwidth}>
             <div className="comeentRight">
-            <div className="apicomments">
-              <Comment user={user} post={post}></Comment>
-            </div>
-            <div className="likecommentcont">
-              <div className="likecomment">
-                <CommentLike user={user} post={post}></CommentLike>
-                <TextField sx={{width:'100%', pl:1, pr:1}} onChange={(e)=>setComment(e.target.value)} value={comment} id="outlined-basic" label="Type comment here..." size='small' variant="outlined" />
-                <Button variant="outlined" onClick={handleClick}>POST</Button>
+              <div className="apicomments">
+                <Comment user={user} post={post}></Comment>
               </div>
-              <div className="text">{post.likes.length} likes</div>
-            </div>
+              <div className="likecommentcont">
+                <div className="likecomment">
+                  <CommentLike user={user} post={post}></CommentLike>
+                  <TextField sx={{ width: '100%', pl: 1, pr: 1 }} onChange={(e) => setComment(e.target.value)} value={comment} id="outlined-basic" label="Type comment here..." size='small' variant="outlined" />
+                  <Button variant="outlined" onClick={handleClick}>POST</Button>
+                </div>
+                <div className="text">{post.likes.length} likes</div>
+              </div>
             </div>
           </Box>
         </Box>

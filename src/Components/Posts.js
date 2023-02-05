@@ -1,5 +1,5 @@
 import { Box } from '@mui/system';
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { database } from '../firebase'
 import Video from './Video';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -7,20 +7,27 @@ import Avatar from '@mui/material/Avatar';
 import Like from './Like';
 import CommentIcon from '@mui/icons-material/Comment';
 import CommentModal from './CommentModal';
-
+import { AuthContext } from '../Context/AuthContext';
+let obj = {};
 function Posts(props) {
-  // console.log(props)
-  const [postDatabase, setPostDatabase] = useState(null);
-  const callback = (entries)=>{
-    console.log(entries);
-  }
-  let observer = new IntersectionObserver(callback, {threshold:.6});
-    useEffect(()=>{
-        let el = document.querySelctorAll('.videocont');
-        el.forEach(vid=>{
-          observer.observe(vid);
-        })
+  const { userData } = useContext(AuthContext);
+  userData.forEach(userObj => {
+    let pids = userObj.postIdDatabase;
+    pids.forEach(id => {
+      obj[id] = [userObj.profileUrl, userObj.fullName];
     })
+  })
+  const [postDatabase, setPostDatabase] = useState(null);
+  // const userData=[];
+  // let getUser= ()=>{
+  //   database.users.onSnapshot((docArr)=>{
+  //     docArr.forEach(doc=>{
+  //       userData.push({...doc.data()});
+  //       console.log(userData);
+  //     })
+  //   })
+  // }
+  // getUser();
   useEffect(() => {
     let pArr = []
     // console.log(database.posts)
@@ -38,23 +45,20 @@ function Posts(props) {
     // console.log(postDatabase)
     return unsub;
   }, [])
+  // console.log(obj, postDatabase);
   return (
     <div className='postHolder'>
       {
-        !postDatabase
+        postDatabase && obj
           ?
-          <Box sx={{ display: 'flex' }}>
-            <CircularProgress />
-          </Box>
-          :
           <div className='post'>
             {
               postDatabase.map((post) => (
-                <div className='frag' key={post.id}>
+                <div className='frag' key={props.user.createdAt}>
                   <Video source={post} key={post.pId}></Video>
                   <div className="avatar" >
-                    <Avatar sx={{ marginRight: 1 }} alt={props.user.fullName} src={props.user.profileUrl} />
-                    <p className='name'>{props.user.fullName}</p>
+                    <Avatar sx={{ marginRight: 1 }} alt={obj[post.pId][1]} src={obj[post.pId][0]?obj[post.pId][0]:''} />
+                    <p className='name'>{obj[post.pId][1]}</p>
                   </div>
                   <div className="likecont"><Like user={props.user} post={post}></Like></div>
                   <CommentModal post={post} user={props.user}></CommentModal>
@@ -62,6 +66,10 @@ function Posts(props) {
               ))
             }
           </div>
+          :
+          <Box sx={{ display: 'flex' }}>
+            <CircularProgress />
+          </Box>
       }
     </div>
   )
