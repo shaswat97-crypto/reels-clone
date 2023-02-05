@@ -24,7 +24,7 @@ function Feed() {
 
   return (
     <>
-      <Header authUser={databaseUser}></Header>
+      <Header user={databaseUser}></Header>
       <div className='upload'><UploadFile user={databaseUser}></UploadFile></div>
 
       <main>

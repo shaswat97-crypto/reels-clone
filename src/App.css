@@ -200,6 +200,10 @@ video{
   color: rgb(80, 79, 79);
   cursor: pointer;
 }
+.logoHeader{
+  padding-top: .7rem;
+  cursor: pointer;
+}
 
 @media screen and (max-width:800px){
   .signupwrapper{

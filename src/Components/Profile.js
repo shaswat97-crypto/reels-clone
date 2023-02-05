@@ -13,10 +13,11 @@ import CommentIcon from '@mui/icons-material/Comment';
 import CommentModal from './CommentModal';
 import { Box } from '@mui/system';
 import Video from './Video';
+import UploadImage from './UploadImage';
 function Profile() {
   let { id } = useParams();
   let { user } = useContext(AuthContext);
-  const [dbUser, setDbUser] = useState(null);
+  const [databaseUser, setdatabaseUser] = useState(null);
   const [postDatabase, setPostDatabase] = useState(null);
   useEffect(() => {
     let pArr = []
@@ -34,22 +35,22 @@ function Profile() {
 
   useEffect(() => {
     database.users.doc(user.uid).onSnapshot((data) => {
-      setDbUser(data.data());
+      setdatabaseUser(data.data());
     })
   }, [user.uid])
   return (
     <>
-      <Header></Header>
+      <Header user = {databaseUser}></Header>
       {
-        user && dbUser &&
+        user && databaseUser &&
         <div className="contcont">
           <div className="container">
             <div className="top">
-              <div className="left"><Avatar sx={{ height: '5rem', width: '5rem' }} alt={user.email} src="/static/images/avatar/1.jpg" /><Button variant='contained'>Upload Image</Button></div>
+              <div className="left"><Avatar sx={{ height: '5rem', width: '5rem' }} alt={user.email} src={databaseUser.profileUrl} /><UploadImage user={user}></UploadImage></div>
               <div className="right">
-                <div>Name : {dbUser.fullName}</div>
+                <div>Name : {databaseUser.fullName}</div>
                 <div>email : {user.email}</div>
-                <div>Posts : {dbUser.postIdDatabase.length}</div>
+                <div>Posts : {databaseUser.postIdDatabase.length}</div>
               </div>
             </div>
             {
@@ -61,16 +62,13 @@ function Profile() {
                       <CircularProgress />
                     </Box>
                     :
-                    <div className='post'>
+                    <div className='profilePost'>
                       {
                         postDatabase.map((post) => (
-                          <div className='frag' key={post.id}>
+                          <div className='profileFrag' key={post.id}>
                             <Video source={post} key={post.pId}></Video>
-                            <div className="avatar" >
-                              <p className='name'>{dbUser.fullName}</p>
-                            </div>
-                            <div className="likecont"><Like user={dbUser} post={post}></Like></div>
-                            <CommentModal post={post} user={dbUser}></CommentModal>
+                            <div className="likecont"><Like user={databaseUser} post={post}></Like></div>
+                            <CommentModal post={post} user={databaseUser}></CommentModal>
                           </div>
                         ))
                       }

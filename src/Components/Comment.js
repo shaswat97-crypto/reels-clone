@@ -2,7 +2,7 @@ import { Avatar, CircularProgress } from '@mui/material';
 import React, { useEffect, useState } from 'react'
 import { database } from '../firebase'
 
-function Comment({ post }) {
+function Comment({ user, post }) {
   // console.log(post.comments);
   const [commentArr, setCommentArr] = useState([]);
   useEffect(() => {
@@ -24,7 +24,7 @@ function Comment({ post }) {
             {
               commentArr.map((comment) => (
                 <div style={{ display: 'flex', alignItems:'center', marginBottom:'6px' }}>
-                  <Avatar src={'sd'} />
+                  <Avatar src={user.profileUrl} />
                   <p>&nbsp;&nbsp;<span style={{ fontWeight: 'bold' }}>{comment.userName}</span>&nbsp;&nbsp; {comment.comment}</p>
                 </div>
               ))

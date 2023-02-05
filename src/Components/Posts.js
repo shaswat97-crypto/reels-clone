@@ -11,6 +11,16 @@ import CommentModal from './CommentModal';
 function Posts(props) {
   // console.log(props)
   const [postDatabase, setPostDatabase] = useState(null);
+  const callback = (entries)=>{
+    console.log(entries);
+  }
+  let observer = new IntersectionObserver(callback, {threshold:.6});
+    useEffect(()=>{
+        let el = document.querySelctorAll('.videocont');
+        el.forEach(vid=>{
+          observer.observe(vid);
+        })
+    })
   useEffect(() => {
     let pArr = []
     // console.log(database.posts)
@@ -43,7 +53,7 @@ function Posts(props) {
                 <div className='frag' key={post.id}>
                   <Video source={post} key={post.pId}></Video>
                   <div className="avatar" >
-                    <Avatar sx={{ marginRight: 1 }} alt={props.user.fullName} src="/static/images/avatar/1.jpg" />
+                    <Avatar sx={{ marginRight: 1 }} alt={props.user.fullName} src={props.user.profileUrl} />
                     <p className='name'>{props.user.fullName}</p>
                   </div>
                   <div className="likecont"><Like user={props.user} post={post}></Like></div>

@@ -38,14 +38,14 @@ img{
     width: 100%;
     display: flex;
 }
-.post{
+.profilePost{
     width: 100%;
     display: flex;
     flex-wrap: wrap;
     gap: 2rem;
     justify-content: flex-start;
 }
-.frag{
+.profileFrag{
     width: 20vw;
     height: 63vh;
 }

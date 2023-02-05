@@ -15,25 +15,29 @@ import AdbIcon from '@mui/icons-material/Adb';
 import logo from '../images/logo-big.PNG'
 import HomeIcon from '@mui/icons-material/Home';
 import ExploreIcon from '@mui/icons-material/Explore';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { AuthContext } from '../Context/AuthContext'
 import { useContext, useState, useEffect } from 'react'
+import { createTheme, minHeight } from '@mui/system';
 
 const style = {
   color: 'black',
   fontSize: '2.5rem',
-  padding: '4px'
+  padding: '4px',
+  cursor:'pointer'
 }
 const hStyle = {
   border:'none',
   backgroundColor:'white',
   margin:'0',
-  alignItems:'center'
+  alignItems:'center',
+  minHeight:'10px'
 }
 const settings = ['Profile', 'Logout'];
 
-
-function Header() {
+function Header(props) {
+  // console.log(props);
+  let databaseUser = props.user;
   const navigate = useNavigate();
   const { user, logout } = useContext(AuthContext);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
@@ -50,19 +54,20 @@ function Header() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
   //   D:\reels-clone\src\images\logo-big.PNG
   return (
     <AppBar sx={hStyle} position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <div><img src={logo} alt="" /></div>
+          <div><img onClick={()=>{databaseUser?navigate('/'):navigate('/login')}} src={logo} className='logoHeader' alt="" /></div>
           <Box sx={{ width: '90%' }}></Box>
           <Box sx={{ display: 'flex' }}>
-            <HomeIcon sx={style}></HomeIcon>
-            <ExploreIcon sx={style}></ExploreIcon>
+            <HomeIcon onClick={()=>{databaseUser?navigate('/'):navigate('/login')}} sx={style}></HomeIcon>
+            <Link to={'https://github.com/shaswat97-crypto'}><ExploreIcon sx={style}></ExploreIcon></Link> 
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar sx={{marginLeft:1}} alt={user.email} src="/static/images/avatar/2.jpg" />
+                <Avatar sx={{marginLeft:1, height:'28px', width:'28px'}} alt={user.email} src={databaseUser&&databaseUser.profileUrl} />
               </IconButton>
             </Tooltip>
             <Menu

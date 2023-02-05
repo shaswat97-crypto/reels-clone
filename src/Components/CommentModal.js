@@ -62,7 +62,7 @@ function CommentModal({ post, user }) {
           <Box sx={{ width: '60%', pt: 4, pr:1, pl:1, pb:1 }}>
             <div className="comeentRight">
             <div className="apicomments">
-              <Comment post={post}></Comment>
+              <Comment user={user} post={post}></Comment>
             </div>
             <div className="likecommentcont">
               <div className="likecomment">
