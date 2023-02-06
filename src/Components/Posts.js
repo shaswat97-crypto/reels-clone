@@ -8,26 +8,38 @@ import Like from './Like';
 import CommentIcon from '@mui/icons-material/Comment';
 import CommentModal from './CommentModal';
 import { AuthContext } from '../Context/AuthContext';
-let obj = {};
 function Posts(props) {
-  const { userData } = useContext(AuthContext);
-  userData.forEach(userObj => {
-    let pids = userObj.postIdDatabase;
-    pids.forEach(id => {
-      obj[id] = [userObj.profileUrl, userObj.fullName];
-    })
-  })
+  // let { userData } = useContext(AuthContext);
+
+  // console.log(userData)
+  const [userData, setUserData] = useState(null);
   const [postDatabase, setPostDatabase] = useState(null);
-  // const userData=[];
-  // let getUser= ()=>{
-  //   database.users.onSnapshot((docArr)=>{
-  //     docArr.forEach(doc=>{
-  //       userData.push({...doc.data()});
-  //       console.log(userData);
-  //     })
-  //   })
-  // }
-  // getUser();
+  const [obj, setObj] = useState(null);
+  useEffect(() => {
+    // let userData = [];
+    database.users.get()
+      .then(arr => {
+        // console.log(arr.docs)
+        setUserData(arr.docs);
+      })
+    setUserData(userData);
+  }, [database])
+  useEffect(() => {
+    // console.log(userData);
+    let obj = {};
+    if (userData && userData.length > 0) {
+      userData.forEach(doc => {
+        let userObj = doc.data();
+        // console.log(userObj);
+        let pids = userObj.postIdDatabase;
+        pids.forEach(id => {
+          obj[id] = [userObj.profileUrl, userObj.fullName];
+        })
+      })
+    }
+    setObj(obj);
+  }, [userData])
+
   useEffect(() => {
     let pArr = []
     // console.log(database.posts)
@@ -47,18 +59,18 @@ function Posts(props) {
   }, [])
   // console.log(obj, postDatabase);
   return (
-    <div className='postHolder'>
+    <div className='postHolder' >
       {
-        postDatabase && obj
+        postDatabase != null && obj != null && userData.length > 0
           ?
-          <div className='post'>
+          <div className='post' >
             {
               postDatabase.map((post) => (
                 <div className='frag' key={props.user.createdAt}>
                   <Video source={post} key={post.pId}></Video>
                   <div className="avatar" >
-                    <Avatar sx={{ marginRight: 1 }} alt={obj[post.pId]?obj[post.pId][1]:'guest'} src={obj[post.pId]?obj[post.pId][0]:''} />
-                    <p className='name'>{obj[post.pId]?obj[post.pId][1]:'guest'}</p>
+                    <Avatar sx={{ marginRight: 1 }} alt={obj[post.pId] ? obj[post.pId][1] : 'guest'} src={obj[post.pId] ? obj[post.pId][0] : ''} />
+                    <p className='name'>{obj[post.pId] ? obj[post.pId][1] : 'guest'}</p>
                   </div>
                   <div className="likecont"><Like user={props.user} post={post}></Like></div>
                   <CommentModal post={post} user={props.user}></CommentModal>
@@ -67,7 +79,7 @@ function Posts(props) {
             }
           </div>
           :
-          <Box sx={{ display: 'flex' }}>
+          <Box key={props.user.createdAt} sx={{ display: 'flex' }}>
             <CircularProgress />
           </Box>
       }

@@ -43,7 +43,7 @@ export default function Login() {
       let uid = userObj.user.uid;
       setLoading(false);
       history('/');
-      window.reload();
+      // window.reload();
     }
     catch (err) {
       console.log(err);
