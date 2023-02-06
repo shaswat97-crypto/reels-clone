@@ -22,9 +22,10 @@ import { createTheme, minHeight } from '@mui/system';
 
 const style = {
   color: 'black',
-  fontSize: '2.5rem',
+  fontSize: '2.3rem',
   padding: '4px',
-  cursor: 'pointer'
+  cursor: 'pointer',
+  margin:'4px'
 }
 const hStyle = {
   border: 'none',
@@ -71,14 +72,14 @@ function Header(props) {
     <AppBar sx={hStyle} position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <div><img onClick={() => { databaseUser ? navigate('/') : navigate('/login') }} src={logo} className='logoHeader' alt="" /></div>
+          <div className='profileImageCont'><img onClick={() => { databaseUser ? navigate('/') : navigate('/login') }} src={logo} className='logoHeader' alt="" /></div>
           <Box sx={{ width: '90%' }}></Box>
           <Box sx={{ display: 'flex' }}>
             <HomeIcon onClick={() => { databaseUser ? navigate('/') : navigate('/login') }} sx={style}></HomeIcon>
             <a href={'https://github.com/shaswat97-crypto'} target={'_blank'}><ExploreIcon sx={style}></ExploreIcon></a>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar sx={{ marginLeft: 1, height: '28px', width: '28px' }} alt={user.email} src={databaseUser && databaseUser.profileUrl} />
+                <Avatar sx={{ marginLeft: 1.3, height: '28px', width: '28px' }} alt={user.email} src={databaseUser && databaseUser.profileUrl} />
               </IconButton>
             </Tooltip>
             <Menu

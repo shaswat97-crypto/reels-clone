@@ -57,8 +57,8 @@ function Posts(props) {
                 <div className='frag' key={props.user.createdAt}>
                   <Video source={post} key={post.pId}></Video>
                   <div className="avatar" >
-                    <Avatar sx={{ marginRight: 1 }} alt={obj[post.pId][1]} src={obj[post.pId][0]?obj[post.pId][0]:''} />
-                    <p className='name'>{obj[post.pId][1]}</p>
+                    <Avatar sx={{ marginRight: 1 }} alt={obj[post.pId]?obj[post.pId][1]:'guest'} src={obj[post.pId][0]?obj[post.pId][0]:''} />
+                    <p className='name'>{obj[post.pId]?obj[post.pId][1]:'guest'}</p>
                   </div>
                   <div className="likecont"><Like user={props.user} post={post}></Like></div>
                   <CommentModal post={post} user={props.user}></CommentModal>
