@@ -1,93 +1,57 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* Define a grid layout */
+.p-container {
+  padding-left: 250px;
+  padding-right: 450px;
 }
 
-img{
-    height: 100%;
-    width: 100%;
-}
-.contcont{
-    display: flex;
-    justify-content: center;
-    width: 100vw;
-}
-.container{
-    width: 70vw;
-}
-.top{
-    height: 30vh;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    
-}
-.top .left, .top .right{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-}
-.top .right{
-    align-items: flex-start;
-}
-.bottom{
-    margin-top: 2rem;
-    width: 100%;
-    display: flex;
-}
-.profilePost{
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    justify-content: flex-start;
-}
-.profileFrag{
-    width: 12rem;
-    height: 22rem;
-    position: relative;
-}
-.commentMod{
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-}
-.commentMod>div{
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-}
-.commentMod>div>svg{
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-}
-@media screen and (max-width:860px){
-    .profilePost{
-        justify-content: center;
-    }
+.p-header {
+  margin: 50px 10px;
+  /* grid-area: p-header; */
+  background-color: #f0f0f0;
+  /* padding: 1.5rem; */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 80px; /* Increased height */
+  gap: 1rem;
+  /* padding: 50px 10px;
+  margin-top: 100px; */
 }
 
-@media screen and (max-width:500px){
-    .profilePost{
-        justify-content: center;
-    }
-    .profileFrag{
-        width: 5rem;
-        height: 10rem;
-        position: relative;
-    }
-    .container{
-        width: 100vw;
-    }
-    .contcont{
-        padding: 0 1rem;
-    }
+/* Style the upper part of the main body */
+.p-main-body {
+  /* grid-area: p-main-body; */
+  display: flex;
+  flex-direction: row;
+  /* padding: 1rem; */
 }
+
+.p-videos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.p-videos video {
+  max-width: 300px;
+  min-height: 500px;
+}
+
+video:hover video {
+  transform: scale(1.05); /* Zoom effect on hover */
+}
+
+/* For screens 768px and smaller */
+@media screen and (max-width: 1000px) {
+  .p-container{
+    padding-right: 0;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .p-container{
+    padding-left: 0;
+  }
+}
+ 

@@ -1,0 +1,73 @@
+.s-main{
+    margin-top: 30px;
+    padding-left: 10px;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 250px;
+    margin-right: 1rem;
+    z-index: 100;
+    border-right: 1px solid #ccc;
+    height: 100vh;
+}
+
+@media (max-width: 600px) {
+  .s-main{
+    display: none;
+  }
+}
+
+
+.avatar-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+.icon-hover {
+  transform: scale(1.1);
+}
+
+.search-bar {
+  width: 80%;
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+  font-size: 16px;
+  outline: none;
+}
+
+/* Sidebar styles */
+
+.MuiListItem-button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.MuiListItem-button:hover .MuiListItemIcon-root {
+  color: #fff;
+}
+
+.MuiListItem-button:hover .MuiSvgIcon-root {
+  transform: scale(1.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.MuiDrawer-paper {
+  background-color: #fff;
+  border-right: none;
+  border-top: none;
+  border-bottom: none;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.MuiDrawer-paperAnchorTop {
+  border-top: none;
+  top: 0;
+  height: 100%;
+}
+
+/* Hide scrollbar for drawers */
+.MuiDrawer-paper::-webkit-scrollbar {
+  display: none;
+}

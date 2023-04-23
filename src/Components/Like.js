@@ -16,25 +16,26 @@ function Like({ post }) {
           setDatabaseUser(data.data());
           // console.log(databaseUser)
           let check = false;
-          check = post.likes.includes(data.id) ? true : false
+          // console.log(post.data())
+          check = post.data().likes.includes(data.id) ? true : false
           // console.log(check, post.likes, databaseUser)
           setLike(check);
         })
 
     })()
     // console.log('first fn')
-  }, [post.likes], [user])
+  }, [post], [user])
 
   let handleClick = async (e) => {
     if (like) {
-      let narr = post.likes.filter((id) => { return id != databaseUser.userId })
-      await database.posts.doc(post.pId).update({
+      let narr = post.data().likes.filter((id) => { return id != databaseUser.userId })
+      await database.posts.doc(post.id).update({
         likes: [...narr]
       })
     }
     else {
-      let narr = [...post.likes, databaseUser.userId]
-      await database.posts.doc(post.pId).update({
+      let narr = [...post.data().likes, databaseUser.userId]
+      await database.posts.doc(post.id).update({
         likes: [...narr]
       })
     }
@@ -45,7 +46,19 @@ function Like({ post }) {
     <React.Fragment>
       {
         like != null && post && databaseUser &&
-          like ? <FavoriteIcon className='like' onClick={(e) => handleClick(e)}></FavoriteIcon> : <FavoriteIcon className='unlike' onClick={(e) => handleClick(e)}></FavoriteIcon>
+          like ? <FavoriteIcon sx={{
+            fontSize: '25px',
+            cursor:'pointer',
+            '&:hover': {
+              fontSize: '30px',
+            },
+          }} className='like' onClick={(e) => handleClick(e)}></FavoriteIcon> : <FavoriteIcon sx={{
+            fontSize: '25px',
+            cursor:'pointer',
+            '&:hover': {
+              fontSize: '30px',
+            },
+          }} className='unlike' onClick={(e) => handleClick(e)}></FavoriteIcon>
       }
     </React.Fragment>
   )

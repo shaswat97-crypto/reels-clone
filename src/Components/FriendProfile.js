@@ -26,24 +26,26 @@ import { db } from "../firebase";
 import { Modal, TextField } from "@mui/material";
 import ExploreComments from "./ExploreComments";
 import CommentLike from "./CommentLike";
+import context from "./Context";
 import RightSidebar from "./RightSidebar";
 // import a from "./sidebar.css";
 // import a from './'
 
 function Profile() {
   let { id } = useParams();
-  let { user } = useContext(AuthContext);
   const [databaseUserProfile, setdatabaseUserProfile] = useState(null);
   const [posts, setPosts] = useState(null);
+  const util = useContext(context);
+  const currentUser = util.databaseUser;
   useEffect(() => {
-    database.users.doc(user.uid).onSnapshot((data) => {
+    database.users.doc(id).onSnapshot((data) => {
       // console.log(data.data())
       setdatabaseUserProfile(data.data());
     });
-  }, [user]);
+  }, [id]);
 
   useEffect(() => {
-    console.log(databaseUserProfile);
+    // console.log(databaseUserProfile);
     if (databaseUserProfile) {
       console.log("fetch posts");
       let arr;
@@ -149,24 +151,23 @@ function Profile() {
 
   return (
     <>
-      <Sidebar user={databaseUserProfile} />
+      <Sidebar user={currentUser} />
       {databaseUserProfile && posts ? (
         <div className="p-container">
           <div className="p-header">
             <div className="p-image">
               <Avatar
                 sx={{ height: "5rem", width: "5rem" }}
-                alt={user.email}
+                alt={databaseUserProfile.email}
                 src={databaseUserProfile.profileUrl}
               />
-              <UploadImage user={user}></UploadImage>
             </div>
             <div className="p-right-section">
               <div>
                 Name : <b>{databaseUserProfile.fullName}</b>
               </div>
               <div>
-                email : <b>{user.email}</b>
+                email : <b>{databaseUserProfile.email}</b>
               </div>
               <div>
                 Posts :{" "}
@@ -274,7 +275,7 @@ function Profile() {
           <CircularProgress />
         </Box>
       )}
-      <RightSidebar user={databaseUserProfile} />
+      <RightSidebar user={currentUser} />
     </>
   );
 }

@@ -1,0 +1,47 @@
+/* Container */
+.main-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  /* Left Sidebar */
+  .left-sidebar {
+    width: 250px;
+    /* height: 100vh;
+    background-color: #ccc;
+    position: fixed;
+    top: 0;
+    left: 0; */
+  }
+  
+  /* Main Body */
+  .main-body {
+    /* flex: 1; */
+    background-color: #f2f2f2;
+    padding: 20px;
+  }
+  
+  /* Right Sidebar */
+  .right-sidebar {
+    width: 400px;
+    
+  }
+  
+  /* Media Queries */
+  @media screen and (max-width: 1015px) {
+    /* On small screens, make the layout vertical */
+    .container {
+      flex-direction: column;
+    }
+  
+    /* Remove sticky position for sidebars */
+    .left-sidebar,
+    .right-sidebar {
+      /* position: static;
+      width: 100%;
+      height: auto; */
+      display: none;
+    }
+  }
+  

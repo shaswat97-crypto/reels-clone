@@ -31,6 +31,7 @@ export function AuthProvider({children}) {
         setUserData(arr);
         return unsub;
     },[database])
+    
     const [user, setUser] = useState();
     const [loading, setLoading] = useState(true);
 

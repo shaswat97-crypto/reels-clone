@@ -1,0 +1,32 @@
+.message-list {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.message {
+  border-radius: 15px;
+  background-color: lightgray;
+  margin: 20px 20px;
+  padding: 10px;
+  max-width: 80%;
+}
+
+.message-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.message-user {
+  color: #333;
+}
+
+.message-time {
+  color: #999;
+}
+
+.message-body {
+  color: #333;
+}
