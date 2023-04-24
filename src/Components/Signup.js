@@ -123,7 +123,7 @@ export default function Signup() {
             <TextField fullWidth label="Mobile Number or Email" id="fullWidth" margin='dense' size='small' value={email} onChange={(e) => { setEmail(e.target.value) }} />
             <TextField fullWidth label="Full Name" id="fullWidth" margin='dense' size='small' value={name} onChange={(e) => { setName(e.target.value) }} />
             <TextField fullWidth label="Username" id="fullWidth" margin='dense' size='small' value={userName} onChange={(e) => { setUserName(e.target.value) }} />
-            <TextField fullWidth label="Password" id="fullWidth" margin='dense' size='small' value={password} onChange={(e) => { setPassword(e.target.value) }} />
+            <TextField fullWidth   type="password" label="Password" id="fullWidth" margin='dense' size='small' value={password} onChange={(e) => { setPassword(e.target.value) }} />
             <Typography className='tnc' sx={{ fontSize: 12, m: 1, mt: 2 }}>
               People who use our service may have uploaded your contact information to Instagram. Learn More
             </Typography>

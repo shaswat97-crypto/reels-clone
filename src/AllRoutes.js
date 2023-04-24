@@ -17,13 +17,15 @@ function AllRoutes() {
   const { user, logout } = useContext(AuthContext);
   const [databaseUser, setDatabaseUser] = useState("");
   useEffect(() => {
-    let unsub = database.users.doc(user.uid).onSnapshot((snapshot) => {
-      setDatabaseUser(snapshot.data());
-    });
-
-    return () => {
-      unsub();
-    };
+    if(user){
+      let unsub = database.users.doc(user.uid).onSnapshot((snapshot) => {
+        setDatabaseUser(snapshot.data());
+      });
+  
+      return () => {
+        unsub();
+      };
+    }
   }, [user]);
 
   const util = { databaseUser };

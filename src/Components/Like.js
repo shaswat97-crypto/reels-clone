@@ -17,7 +17,7 @@ function Like({ post }) {
           // console.log(databaseUser)
           let check = false;
           // console.log(post.data())
-          check = post.data().likes.includes(data.id) ? true : false
+          check = post.data().likes && post.data().likes.includes(data.id) ? true : false
           // console.log(check, post.likes, databaseUser)
           setLike(check);
         })

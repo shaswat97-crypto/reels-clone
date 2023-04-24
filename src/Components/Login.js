@@ -91,7 +91,7 @@ export default function Login() {
               error && <Alert sx={{ fontSize: 13 }} severity="error">{error}</Alert>
             }
             <TextField fullWidth label="Phone number, username or email" id="fullWidth" margin='dense' size='small' value={email} onChange={(e) => { setEmail(e.target.value) }} />
-            <TextField fullWidth label="Password" id="fullWidth" margin='dense' size='small' value={password} onChange={(e) => { setPassword(e.target.value) }} />
+            <TextField   type="password" fullWidth label="Password" id="fullWidth" margin='dense' size='small' value={password} onChange={(e) => { setPassword(e.target.value) }} />
             <Button sx={{ mt: 2, mb: 2 }} disabled={loading} variant="contained" size='small' fullWidth={true} margin='dense' onClick={handleClick} >Log in</Button>
             <Button sx={{ mb: 2 }} disabled={loading} variant="contained" size='small' fullWidth={true} margin='dense' onClick={handleGuest} >Log in as Guest</Button>
             <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}><Link style={{ textDecoration: 'none', fontSize: '12px' }} to={'/forgotPassword'} >Forgot password ?</Link></Box>

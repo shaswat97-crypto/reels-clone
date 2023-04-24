@@ -8,6 +8,7 @@ import Like from "./Like";
 import CommentIcon from "@mui/icons-material/Comment";
 import CommentModal from "./CommentModal";
 import { AuthContext } from "../Context/AuthContext";
+import { Link } from "react-router-dom";
 import {
   collection,
   query,
@@ -31,15 +32,16 @@ function Posts(props) {
       unsubscribe = onSnapshot(q, (querySnapshot) => {
         const arr = [];
         querySnapshot.forEach((doc) => {
-          arr.push(doc);
+          arr.unshift(doc);
         });
+        console.log(arr);
         setPosts(arr);
       });
     }
     getCities();
 
     return () => unsubscribe();
-  }, []);
+  }, [db]);
 
   // console.log(obj, postDatabase);
   return (
@@ -53,11 +55,13 @@ function Posts(props) {
                 <div className="frag" key={post.id}>
                   <Video source={post.data()}></Video>
                   <div className="avatar">
+                  <Link to={`/friend/${post.data().user.userId}`} >
                     <Avatar
-                      sx={{ marginRight: 1 }}
+                      sx={{ cursor: "pointer", mr:1 }}
                       alt={post.data().user && post.data().user.fullName}
                       src={post.data().user && post.data().user.profileUrl}
                     />
+                    </Link>
                     <p className="name">
                       {post.data().user && post.data().user.fullName}
                     </p>
@@ -68,11 +72,13 @@ function Posts(props) {
                     {post.data().user && post.data().user.fullName}
                   </p>
                   <div className="avatar2">
-                    <Avatar
-                      // sx={{ marginRight: 1 }}
-                      alt={post.data().user && post.data().user.fullName}
-                      src={post.data().user && post.data().user.profileUrl}
-                    />
+                    <Link to={`/friend/${post.data().user.userId}`}>
+                      <Avatar
+                        sx={{ cursor: "pointer" }}
+                        alt={post.data().user && post.data().user.fullName}
+                        src={post.data().user && post.data().user.profileUrl}
+                      />
+                    </Link>
                   </div>
 
                   <div className="">

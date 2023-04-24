@@ -6,7 +6,7 @@ import { database } from "../firebase";
 import Posts from "./Posts";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
-import a from './feed.css'
+import a from "./feed.css";
 import RightSidebar from "./RightSidebar";
 import context from "./Context";
 
@@ -35,11 +35,9 @@ function Feed() {
   return (
     <>
       <Sidebar user={databaseUser} />
-      {/* <main className="main-container">
-        <div className="main-body"> */}
-          <Posts user={databaseUser}></Posts>
-        {/* </div>
-      </main> */}
+
+      <Posts user={databaseUser}></Posts>
+
       <RightSidebar user={databaseUser} />
     </>
   );

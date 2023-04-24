@@ -120,7 +120,7 @@ function CommentModal({ post, user }) {
                     POST
                   </Button>
                 </div>
-                <div className="text">{post.data().likes.length} likes</div>
+                <div className="text">{post.data().likes && post.data().likes.length} likes</div>
               </div>
             </div>
           </Box>

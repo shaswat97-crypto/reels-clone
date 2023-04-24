@@ -4,15 +4,16 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import { database } from "../firebase";
 import { doc, getDoc, onSnapshot } from "firebase/firestore";
+import { Link } from "react-router-dom";
 
 function Comment({ post }) {
-    console.log('chala');
+    // console.log('chala');
   // console.log(post.comments);
   const [commentArr, setCommentArr] = useState([]);
 
   useEffect(()=>{
     let postd = post.data();
-    console.log('fetch chala', {postd})
+    // console.log('fetch chala', {postd})
     if(postd.comments)
         setCommentArr(postd.comments);
   }, [post]);
@@ -34,7 +35,7 @@ function Comment({ post }) {
                     marginBottom: "6px",
                   }}
                 >
-                  <Avatar src={comment.user.profileUrl} />
+                  <Link to={`friend/${comment.user.userId}`}><Avatar src={comment.user.profileUrl} /></Link>
                   <p>
                     &nbsp;&nbsp;
                     <span style={{ fontWeight: "bold" }}>

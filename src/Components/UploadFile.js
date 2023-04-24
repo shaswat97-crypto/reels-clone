@@ -6,7 +6,7 @@ import { database, storage } from "../firebase";
 import MovieCreationIcon from "@mui/icons-material/MovieCreation";
 import LinearProgress from "@mui/material/LinearProgress";
 import { Box } from "@mui/system";
-
+import {AddCircleOutline as AddCircleOutlineIcon} from "@mui/icons-material";
 function UploadFile(props) {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -27,7 +27,7 @@ function UploadFile(props) {
       }, 2000);
       return;
     }
-    // console.log(file)
+    console.log(file)
     setLoading(true);
     let uid = uuidv4();
     const uploadTask = storage.ref(`/posts/${uid}/${file.name}`).put(file);
@@ -98,7 +98,10 @@ function UploadFile(props) {
             {error}
           </Alert>
         ) : (
-          <div disabled={loading}>Upload</div>
+          <div disabled={loading} style={{display:'flex', alignItems:'center', cursor:"pointer"}}>
+            <AddCircleOutlineIcon sx={{ fontSize: "33px", color:'gray', mr:3 }} />
+            <div>Upload</div>
+          </div>
         )}
       </label>
       {loading && (

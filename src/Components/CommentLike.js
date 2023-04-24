@@ -9,7 +9,7 @@ function Like({ user, post }) {
 
     useEffect(() => {
         let check = false;
-        check = post.data().likes.includes(user.userId) ? true : false
+        check = post.data().likes && post.data().likes.includes(user.userId) ? true : false
         setLike(check);
     }, [post])
 

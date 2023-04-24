@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import {
   Box,
   Drawer,
@@ -20,6 +20,7 @@ import {
   AddCircleOutline as AddCircleOutlineIcon,
   Person as PersonIcon,
   Upload,
+  LogoutOutlined,
 } from "@mui/icons-material";
 import logo from "../images/logo-big.PNG";
 import { useNavigate, Link } from "react-router-dom";
@@ -30,17 +31,19 @@ import q from "./notifications.css";
 import "./sidebar.css";
 import UploadFile from "./UploadFile";
 import Notifications from "./Notifications";
+import { AuthContext } from "../Context/AuthContext";
 
 export default function Sidebar({ user }) {
   const navigate = useNavigate();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
   const [isMessagesOpen, setIsMessagesOpen] = useState(false);
-  console.log(user);
-  const handleProfile = (e)=>{
+  const { logout } = useContext(AuthContext);
+  // console.log(user);
+  const handleProfile = (e) => {
     e.preventDefault();
-    navigate(`/profile/${user.userId}`)
-  }
+    navigate(`/profile/${user.userId}`);
+  };
   const toggleSearchDrawer = () => {
     setIsSearchOpen((prev) => !prev);
   };
@@ -52,7 +55,10 @@ export default function Sidebar({ user }) {
   const toggleNotificationsDrawer = () => {
     setIsNotificationsOpen((prev) => !prev);
   };
-
+  const handleLogout = async() => {
+    await logout();
+    navigate('/login');
+  };
   return (
     <div className="s-main">
       <Box sx={{ flexGrow: 1 }}>
@@ -79,7 +85,7 @@ export default function Sidebar({ user }) {
             </ListItemIcon>
           </ListItem>
           <ListItem
-          onClick={()=>navigate('/')}
+            onClick={() => navigate("/")}
             sx={{
               "&:hover": {
                 bgcolor: "primary.light",
@@ -103,7 +109,7 @@ export default function Sidebar({ user }) {
             <ListItemText primary="Home" />
           </ListItem>
           <ListItem
-          onClick={()=>navigate('/explore')}
+            onClick={() => navigate("/explore")}
             sx={{
               "&:hover": {
                 bgcolor: "primary.light",
@@ -144,9 +150,6 @@ export default function Sidebar({ user }) {
                 .classList.remove("icon-hover")
             }
           >
-            <ListItemIcon>
-              <AddCircleOutlineIcon sx={{ fontSize: "33px" }} />
-            </ListItemIcon>
             <ListItemAvatar>
               <UploadFile user={user} />
             </ListItemAvatar>
@@ -216,6 +219,30 @@ export default function Sidebar({ user }) {
                 .querySelector("svg")
                 .classList.remove("icon-hover")
             }
+            onClick={handleLogout}
+          >
+            <ListItemIcon>
+              <LogoutOutlined sx={{ fontSize: "33px" }} />
+            </ListItemIcon>
+            <ListItemText primary="Logout" />
+          </ListItem>
+          <ListItem
+            sx={{
+              "&:hover": {
+                bgcolor: "primary.light",
+                color: "white",
+                cursor: "pointer",
+              },
+              mb: 1,
+            }}
+            onMouseEnter={(e) =>
+              e.currentTarget.querySelector("svg").classList.add("icon-hover")
+            }
+            onMouseLeave={(e) =>
+              e.currentTarget
+                .querySelector("svg")
+                .classList.remove("icon-hover")
+            }
             onClick={toggleSearchDrawer}
           >
             <ListItemIcon>
@@ -248,7 +275,7 @@ export default function Sidebar({ user }) {
                 src={user && user.profileUrl}
               />
             </ListItemIcon>
-            <ListItemText primary="Profile" />
+            <ListItemText primary="My Profile" />
           </ListItem>
         </List>
       </Box>
